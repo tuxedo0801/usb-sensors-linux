@@ -1,4 +1,4 @@
-#summary TempSensor utility for Voltcraft CO-20
+#summary TempSensor utility for
 
 = Introduction =
 
