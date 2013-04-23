@@ -1,4 +1,4 @@
-#summary TempSensor utility for
+#summary TempSensor utility for Lascar EL-USB-RT
 
 = Introduction =
 
