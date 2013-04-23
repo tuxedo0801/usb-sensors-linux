@@ -1,4 +1,4 @@
-#summary AirSensor utility for Lascar EL-USB-RT
+#summary AirSensor utility for Voltcraft CO-20
 
 = Introduction =
 
