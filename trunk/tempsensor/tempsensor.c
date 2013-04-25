@@ -3,7 +3,26 @@
  *
  * Based on generic_hid.c by Jan Axelson (Apr 22, 2011)
  *
- *
+ * License of generic_hid.c:
+ * 
+ * Licensor grants any person obtaining a copy of this software ("You")
+ * a worldwide, royalty-free, non-exclusive license, for the duration of
+ * the copyright, free of charge, to store and execute the Software in a
+ * computer system and to incorporate the Software or any portion of it
+ * in computer programs You write.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ * 
+ * 
+ * 
+ * 
+ * 
 The application uses the libusb 1.0 API from libusb.org.
 Compile the application with the -lusb-1.0 option. 
 Use the -I option if needed to specify the path to the libusb.h header file. For example:
@@ -105,7 +124,6 @@ int main(void)
 		{
 			// The HID has been detected.
 			// Detach the hidusb driver from the HID to enable using libusb.
-			
 			libusb_detach_kernel_driver(devh, INTERFACE_NUMBER);
 			{
 				result = libusb_claim_interface(devh, INTERFACE_NUMBER);
@@ -113,20 +131,16 @@ int main(void)
 				{
 					device_ready = 1;
 					fprintf(stdout, "USB Device ready\n");
-				}
-				else
-				{
+				} else {
 					fprintf(stderr, "libusb_claim_interface error %d\n", result);
 				}
 			}
-		}
-		else
-		{
+			
+		} else {
 			fprintf(stderr, "Unable to find the device.\n");
 		}
-	}
-	else
-	{
+		
+	} else {
 		fprintf(stderr, "Unable to initialize libusb.\n");
 	}
 	
