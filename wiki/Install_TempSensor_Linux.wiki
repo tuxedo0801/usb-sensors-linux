@@ -26,6 +26,7 @@ Install LibUSB 1.0
 $ sudo apt-get install libusb-1.0
 }}}
 
+----
 = Compile tempsensor from sources =
 
 == Install required software ==
@@ -50,10 +51,12 @@ Compile the source code
 $ gcc -o tempsensor tempsensor.c -lusb-1.0
 }}}
 
+----
 = Download binary file =
 
 Software not released yet
 
+----
 = Troubleshooting =
 
 == Permission denied ==
