@@ -4,6 +4,8 @@
 
 Instructions how to install the 'tempsensor' utility on Linux.
 
+NOTE! This software is still under development, it does not yet work properly.
+
 = Tested on =
 
  * Debian 6 i386 (via VMWare)
@@ -48,11 +50,9 @@ Compile the source code
 $ gcc -o tempsensor tempsensor.c -lusb-1.0
 }}}
 
-
-
 = Download binary file =
 
-To be done...
+Software not released yet
 
 = Troubleshooting =
 
