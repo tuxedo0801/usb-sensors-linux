@@ -1,0 +1,26 @@
+#summary Install TempSensor on Linux
+
+= Introduction =
+
+Instructions how to install the TempSensor utility on Linux.
+
+= Tested on =
+
+ * Debian 6 i386 (via VMWare)
+ * Raspbian (Raspberry Pi)
+
+= Details =
+
+== Requirements ==
+
+ * The libusb 1.0 is required for the USB communication.
+
+== LibUSB 1.0 ==
+
+Install LibUSB 1.0
+
+{{{
+$ sudo apt-get install libusb-1.0
+}}}
+
+
