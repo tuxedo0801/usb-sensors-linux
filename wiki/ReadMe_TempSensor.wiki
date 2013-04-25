@@ -3,3 +3,13 @@
 = Introduction =
 
 Under work...
+
+== USB device ==
+
+The command lsusb will show following device for the Lascae EL-USB-RT.
+
+{{{
+$ airsensor$ lsusb
+Bus 002 Device 005: ID 1781:0ec4 Multiple Vendors 
+$ 
+}}}
