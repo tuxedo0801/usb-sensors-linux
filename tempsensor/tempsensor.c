@@ -122,7 +122,7 @@ void help() {
 	printf("Options:\n");
 	printf("-v = Verbose printout\n");
 	printf("-t = Print temperature value and exit\n");
-	printf("-u = Print humidity value and exit\n"
+	printf("-u = Print humidity value and exit\n");
 	printf("-h = Help, this printout\n");
 	exit(0);
 	
