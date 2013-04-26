@@ -175,7 +175,7 @@ int main(int argc, char *argv[])
 	}
 
 	if (verbose == 1) {
-		printf("TempSensor 0.1");
+		printf("TempSensor 0.1\n");
 	}
 
 	static const int VENDOR_ID = 0x1781;
@@ -186,7 +186,7 @@ int main(int argc, char *argv[])
 	int result;
 
 	if (verbose == 1) {
-		printf("Init sensor");
+		printf("Init sensor\n");
 	}
 	
 	result = libusb_init(NULL);
@@ -205,7 +205,7 @@ int main(int argc, char *argv[])
 				{
 					device_ready = 1;
 					if (verbose == 1) {
-						printf("USB Device ready");
+						printf("USB Device ready\n");
 					}
 				} else {
 					fprintf(stderr, "Error: libusb_claim_interface error %d\n", result);
@@ -224,7 +224,7 @@ int main(int argc, char *argv[])
 	{
 
 		if (verbose == 1) {
-			printf("Read device");
+			printf("Read device\n");
 		}
 		
 		// Send and receive data.
@@ -254,7 +254,7 @@ int main(int argc, char *argv[])
 			if (bytes_transferred > 0)
 			{
 				if (verbose == 1) {
-					printf("Data received:");
+					printf("Data received:\n");
 				}
 			
 				/*
@@ -270,18 +270,18 @@ int main(int argc, char *argv[])
 				// Humidity data
 				if (data_in[0] == 2)
 				{
-					printf("Humidity");
-					printf("Data1: %02x", data_in[1]);
+					printf("Humidity\n");
+					printf("Data1: %02x\n", data_in[1]);
 					hum_value = (( data_in[1] / 2 ) - 2);
-					printf("Value: %d", hum_value);
+					printf("Value: %d\n", hum_value);
 				}
 				
 				// Temperature data
 				if (data_in[0] == 3)
 				{
-					printf("Temperature", 0);
-					printf("Data1: %02x", data_in[1]);
-					printf("Data2: %02x", data_in[2]);
+					printf("Temperature\n", 0);
+					printf("Data1: %02x\n", data_in[1]);
+					printf("Data2: %02x\n", data_in[2]);
 				}
 				
 			} else {
@@ -293,13 +293,13 @@ int main(int argc, char *argv[])
 		
 		// Finished using the device.
 		if (verbose == 1) {
-			printf("Release interface");
+			printf("Release interface\n");
 		}
 		libusb_release_interface(devh, 0);
 	}
 	
 	if (verbose == 1) {
-		printf("Close USB Device");
+		printf("Close USB Device\n");
 	}
 
 	libusb_close(devh);
