@@ -217,22 +217,19 @@ int main(int argc, char *argv[])
 			*/
 			
 			if (libusb_kernel_driver_active(devh, INTERFACE_NUMBER)) {
-			
-				if (libusb_detach_kernel_driver(devh, INTERFACE_NUMBER)) {
-
-					result = libusb_claim_interface(devh, INTERFACE_NUMBER);
-					if (result >= 0)
-					{
-						device_ready = 1;
-						if (verbose == 1) {
-							printf("USB Device ready\n");
-						}
-					} else {
-						fprintf(stderr, "Error: libusb_claim_interface error %d\n", result);
-					}
-				
-				}
+				libusb_detach_kernel_driver(devh, INTERFACE_NUMBER)
 			}
+
+			result = libusb_claim_interface(devh, INTERFACE_NUMBER);
+			if (result >= 0)
+			{
+				device_ready = 1;
+				if (verbose == 1) {
+					printf("USB Device ready\n");
+				}
+			} else {
+				fprintf(stderr, "Error: libusb_claim_interface error %d\n", result);
+			}	
 			
 		} else {
 			fprintf(stderr, "Error: Unable to find the device.\n");
