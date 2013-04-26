@@ -273,29 +273,31 @@ int main(int argc, char *argv[])
 					// Humidity data
 					if (data_in[0] == 2)
 					{
+						hum_value = (( data_in[1] / 2 ) - 2);
+
 						if (verbose == 1) {
 							printf("Humidity\n");
 							printf("Data1: %02x\n", data_in[1]);
+							printf("Value: %d%\n", hum_value);
 						}
-						hum_value = (( data_in[1] / 2 ) - 2);
-						printf("Humidity: %d%\n", hum_value);
+						
 					}
 				
 					// Temperature data
 					if (data_in[0] == 3)
 					{
-						if (verbose == 1) {
-							printf("Temperature\n", 0);
-							printf("Data1: %02x\n", data_in[1]);
-							printf("Data2: %02x\n", data_in[2]);
-						}
 					
 						int BIT_MASK = (int)0xff;   // low 8 bits
 						int byteValue = (int)(data_in[1] & BIT_MASK);
 					
 						temp_value = ( ( byteValue + data_in[2] ) * 0.1 ) + 3;
 					
-						printf("Temperature: %.1fC\n", temp_value);
+						if (verbose == 1) {
+							printf("Temperature\n", 0);
+							printf("Data1: %02x\n", data_in[1]);
+							printf("Data2: %02x\n", data_in[2]);
+							printf("Value: %.1fC\n", temp_value);
+						}
 					
 					}
 				
@@ -315,6 +317,8 @@ int main(int argc, char *argv[])
 			libusb_release_interface(devh, 0);
 			
 			if (temp_value != 0 && hum_value != 0) {
+				printf("Temperature: %.1fC, ", temp_value);
+				printf("Humidity: %d%\n", hum_value);
 				clean_exit(devh);
 			}
 			
