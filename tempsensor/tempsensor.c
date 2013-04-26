@@ -145,9 +145,9 @@ int main(void)
 {
 
 	// Command line arguments
-	verbose = 0;
-	temperature = 0;
-	humidity = 0;
+	int verbose = 0;
+	int temperature = 0;
+	int humidity = 0;
 
 	while ((argc > 1) && (argv[1][0] == '-'))
 	{
