@@ -291,7 +291,7 @@ int main(int argc, char *argv[])
 					
 					temp_value = ( byteValue * 0.1 ) + 3;
 					
-					printf("Temperature: %20s%20f C\n", temp_value);
+					printf("Temperature: %20f C\n", temp_value);
 					
 				}
 				
