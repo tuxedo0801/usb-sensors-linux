@@ -241,74 +241,70 @@ int main(int argc, char *argv[])
 	
  		char data_in[MAX_INTERRUPT_IN_TRANSFER_SIZE];
 	
-		// Read data from the device.
-		result = libusb_interrupt_transfer(
-			devh,
-			INTERRUPT_IN_ENDPOINT,
-			data_in,
-			MAX_INTERRUPT_OUT_TRANSFER_SIZE,
-			&bytes_transferred,
-			TIMEOUT_MS);
-	
-		if (result >= 0)
-		{
-			if (bytes_transferred > 0)
-			{
-				if (verbose == 1) {
-					printf("Data received:\n");
-				}
-			
-				/*
-				for(i = 0; i < bytes_transferred; i++) {
-					printf("i=%d", i);
-					printf(",%02x ",data_in[i]);
-				}
-				printf("\n");
-				*/
-				
-				data_str = data_in;
-				
-				// Humidity data
-				if (data_in[0] == 2)
-				{
-					if (verbose == 1) {
-						printf("Humidity\n");
-						printf("Data1: %02x\n", data_in[1]);
-					}
-					hum_value = (( data_in[1] / 2 ) - 2);
-					printf("Humidity: %d%\n", hum_value);
-				}
-				
-				// Temperature data
-				if (data_in[0] == 3)
-				{
-					if (verbose == 1) {
-						printf("Temperature\n", 0);
-						printf("Data1: %02x\n", data_in[1]);
-						printf("Data2: %02x\n", data_in[2]);
-					}
-					
-					int BIT_MASK = (int)0xff;   // low 8 bits
-					int byteValue = (int)(data_in[1] & BIT_MASK);
-					
-					temp_value = ( ( byteValue + data_in[2] ) * 0.1 ) + 3;
-					
-					printf("Temperature: %.1fC\n", temp_value);
-					
-				}
-				
-			} else {
-				fprintf(stderr, "Error: No data received (%d)\n", result);
-			}
-		} else {
-			fprintf(stderr, "Error receiving data via interrupt transfer %d\n", result);
-		}
+		while(0==0) {
 		
-		// Finished using the device.
-		if (verbose == 1) {
-			printf("Release interface\n");
+			// Read data from the device.
+			result = libusb_interrupt_transfer(
+				devh,
+				INTERRUPT_IN_ENDPOINT,
+				data_in,
+				MAX_INTERRUPT_OUT_TRANSFER_SIZE,
+				&bytes_transferred,
+				TIMEOUT_MS);
+	
+			if (result >= 0)
+			{
+				if (bytes_transferred > 0)
+				{
+					if (verbose == 1) {
+						printf("Data received:\n");
+					}
+			
+					// Humidity data
+					if (data_in[0] == 2)
+					{
+						if (verbose == 1) {
+							printf("Humidity\n");
+							printf("Data1: %02x\n", data_in[1]);
+						}
+						hum_value = (( data_in[1] / 2 ) - 2);
+						printf("Humidity: %d%\n", hum_value);
+					}
+				
+					// Temperature data
+					if (data_in[0] == 3)
+					{
+						if (verbose == 1) {
+							printf("Temperature\n", 0);
+							printf("Data1: %02x\n", data_in[1]);
+							printf("Data2: %02x\n", data_in[2]);
+						}
+					
+						int BIT_MASK = (int)0xff;   // low 8 bits
+						int byteValue = (int)(data_in[1] & BIT_MASK);
+					
+						temp_value = ( ( byteValue + data_in[2] ) * 0.1 ) + 3;
+					
+						printf("Temperature: %.1fC\n", temp_value);
+					
+					}
+				
+				} else {
+					fprintf(stderr, "Error: No data received (%d)\n", result);
+				}
+			} else {
+				fprintf(stderr, "Error receiving data via interrupt transfer %d\n", result);
+			}
+		
+			// Finished using the device.
+			if (verbose == 1) {
+				printf("Release interface\n");
+			}
+			libusb_release_interface(devh, 0);
 		}
-		libusb_release_interface(devh, 0);
+	
+		sleep(10);
+	
 	}
 	
 	if (verbose == 1) {
