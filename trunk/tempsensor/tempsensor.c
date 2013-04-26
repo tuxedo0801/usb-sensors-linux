@@ -310,7 +310,7 @@ int main(int argc, char *argv[])
 			if (temp_value != 0 && hum_value != 0) {
 				if ( script == 1 ) {
 					printf("%.1f,", temp_value);
-					printf("%d%\n", hum_value);
+					printf("%d\n", hum_value);
 				} else {
 					printf("Temperature: %.1fC, ", temp_value);
 					printf("Humidity: %d%\n", hum_value);				
