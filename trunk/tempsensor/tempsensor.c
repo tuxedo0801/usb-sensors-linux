@@ -128,6 +128,14 @@ void help() {
 	
 }
 
+void clean_exit( libusb_device_handle *devh ) {
+
+	libusb_close(devh);
+	libusb_exit(NULL);
+	return 0;
+
+}
+
 void printout(char *str, int value) {
 	
 	time_t t = time(NULL);
@@ -148,6 +156,7 @@ int main(int argc, char *argv[])
 	int verbose = 0;
 	int temperature = 0;
 	int humidity = 0;
+	int counter = 0;
 
 	while ((argc > 1) && (argv[1][0] == '-'))
 	{
@@ -232,6 +241,7 @@ int main(int argc, char *argv[])
 		
 		int hum_value = 0;
 		float temp_value = 0.0;
+		int loop_counter = 0;
 		
 		int bytes_transferred;
 		int i = 0;
@@ -304,7 +314,11 @@ int main(int argc, char *argv[])
 
 			libusb_release_interface(devh, 0);
 			
-			sleep(10);
+			if (temp_value <> 0 && hum_value <> 0) {
+				clean_exit(devh);
+			}
+			
+			sleep(1);
 	
 		}
 		
@@ -314,8 +328,13 @@ int main(int argc, char *argv[])
 		printf("Close USB Device\n");
 	}
 
+	/*
 	libusb_close(devh);
 	libusb_exit(NULL);
 	return 0;
+	*/
+	
+	clean_exit(devh);
+	
 }
 
