@@ -276,7 +276,7 @@ int main(int argc, char *argv[])
 						printf("Data1: %02x\n", data_in[1]);
 					}
 					hum_value = (( data_in[1] / 2 ) - 2);
-					printf("Humidity: %d %\n", hum_value);
+					printf("Humidity: %d%\n", hum_value);
 				}
 				
 				// Temperature data
@@ -289,9 +289,9 @@ int main(int argc, char *argv[])
 					int BIT_MASK = (int)0xff;   // low 8 bits
 					int byteValue = (int)(data_in[1] & BIT_MASK);
 					
-					temp_value = ( byteValue * 0.1 ) + 3;
+					temp_value = ( ( byteValue + data_in[2] ) * 0.1 ) + 3;
 					
-					printf("Temperature: %20f C\n", temp_value);
+					printf("Temperature: %.1fC\n", temp_value);
 					
 				}
 				
