@@ -141,7 +141,7 @@ void printout(char *str, int value) {
 	}
 }
 
-int main(void)
+int main(int argc, char *argv[])
 {
 
 	// Command line arguments
