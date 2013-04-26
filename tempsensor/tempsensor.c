@@ -270,10 +270,12 @@ int main(int argc, char *argv[])
 				// Humidity data
 				if (data_in[0] == 2)
 				{
-					printf("Humidity\n");
-					printf("Data1: %02x\n", data_in[1]);
+					if (verbose == 1) {
+						printf("Humidity\n");
+						printf("Data1: %02x\n", data_in[1]);
+					}
 					hum_value = (( data_in[1] / 2 ) - 2);
-					printf("Value: %d\n", hum_value);
+					printf("Humidity: %d %\n", hum_value);
 				}
 				
 				// Temperature data
@@ -282,6 +284,12 @@ int main(int argc, char *argv[])
 					printf("Temperature\n", 0);
 					printf("Data1: %02x\n", data_in[1]);
 					printf("Data2: %02x\n", data_in[2]);
+					
+					byte BIT_MASK = (byte)0xff;   // low 8 bits
+					byte byteValue = (byte)(data_in[1] & BIT_MASK);
+					
+					printf("Data=%i", byteValue);
+					
 				}
 				
 			} else {
