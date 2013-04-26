@@ -230,6 +230,8 @@ int main(int argc, char *argv[])
 		// Send and receive data.
 		// read_usb(devh);
 		
+		int hum_value = 0;
+		
 		int bytes_transferred;
 		int i = 0;
 		int result = 0;;
@@ -265,6 +267,8 @@ int main(int argc, char *argv[])
 				{
 					printout("Humidity", 0);
 					printout("Data1: ", data_in[1]);
+					hum_value = (( data_in[1] / 2 ) - 2)
+					printout("Value: ", hum_value);
 				}
 				if (data_in[0] == 3)
 				{
