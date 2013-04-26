@@ -260,11 +260,11 @@ int main(int argc, char *argv[])
 				printf("\n");
 				
 				# Check if temp or hum
-				if (data_in[0] == 2)
+				if (data_in[0] == '02')
 				{
 					printout("Humidity", 0);
 				}
-				if (data_in[0] == 3)
+				if (data_in[0] == '03')
 				{
 					printout("Temperature", 0);
 				}
