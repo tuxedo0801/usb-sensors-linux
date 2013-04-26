@@ -220,6 +220,8 @@ int main(int argc, char *argv[])
 				libusb_detach_kernel_driver(devh, INTERFACE_NUMBER);
 			}
 
+			libusb_set_configuration(devh, INTERFACE_NUMBER);
+
 			result = libusb_claim_interface(devh, INTERFACE_NUMBER);
 			if (result >= 0)
 			{
