@@ -216,7 +216,7 @@ int main(int argc, char *argv[])
 			}
 			*/
 
-			libusb_set_configuration(devh, INTERFACE_NUMBER);
+			// libusb_set_configuration(devh, INTERFACE_NUMBER);
 			
 			if (libusb_kernel_driver_active(devh, INTERFACE_NUMBER)) {
 				libusb_detach_kernel_driver(devh, INTERFACE_NUMBER);
@@ -325,9 +325,8 @@ int main(int argc, char *argv[])
 				printf("Release interface\n");
 			}
 
-			libusb_release_interface(devh, 0);
-			
 			if (temp_value != 0 && hum_value != 0) {
+
 				if ( script == 1 ) {
 					printf("%.1f,", temp_value);
 					printf("%d\n", hum_value);
@@ -335,6 +334,8 @@ int main(int argc, char *argv[])
 					printf("Temperature: %.1fC, ", temp_value);
 					printf("Humidity: %d%\n", hum_value);				
 				}
+
+				libusb_release_interface(devh, 0);
 				clean_exit(devh);
 			}
 			
