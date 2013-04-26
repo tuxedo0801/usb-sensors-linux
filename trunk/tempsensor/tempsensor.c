@@ -292,6 +292,7 @@ int main(int argc, char *argv[])
 				} else {
 					fprintf(stderr, "Error: No data received (%d)\n", result);
 				}
+
 			} else {
 				fprintf(stderr, "Error receiving data via interrupt transfer %d\n", result);
 			}
@@ -300,11 +301,13 @@ int main(int argc, char *argv[])
 			if (verbose == 1) {
 				printf("Release interface\n");
 			}
+
 			libusb_release_interface(devh, 0);
+			
+			sleep(10);
+	
 		}
-	
-		sleep(10);
-	
+		
 	}
 	
 	if (verbose == 1) {
