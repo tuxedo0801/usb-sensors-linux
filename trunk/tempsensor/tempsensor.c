@@ -121,8 +121,7 @@ void help() {
 	printf("TempSensor 0.1 [options]\n");
 	printf("Options:\n");
 	printf("-v = Verbose printout\n");
-	printf("-t = Print temperature value and exit\n");
-	printf("-u = Print humidity value and exit\n");
+	printf("-s = Print only values, in format: temperature, humidity\n");
 	printf("-h = Help, this printout\n");
 	exit(0);
 	
@@ -154,9 +153,7 @@ int main(int argc, char *argv[])
 
 	// Command line arguments
 	int verbose = 0;
-	int temperature = 0;
-	int humidity = 0;
-	int counter = 0;
+	int script = 0;
 
 	while ((argc > 1) && (argv[1][0] == '-'))
 	{
@@ -165,13 +162,9 @@ int main(int argc, char *argv[])
 			case 'v':
 				verbose = 1;
 				break;
-			
-			case 't':
-				temperature = 1;
-				break;
-			
-			case 'u':
-				humidity = 1;
+
+			case 's':
+				script = 1;
 				break;
 			
 			case 'h':
@@ -236,12 +229,8 @@ int main(int argc, char *argv[])
 			printf("Read device\n");
 		}
 		
-		// Send and receive data.
-		// read_usb(devh);
-		
 		int hum_value = 0;
 		float temp_value = 0.0;
-		int loop_counter = 0;
 		
 		int bytes_transferred;
 		int i = 0;
@@ -303,10 +292,12 @@ int main(int argc, char *argv[])
 				
 				} else {
 					fprintf(stderr, "Error: No data received (%d)\n", result);
+					clean_exit(devh);
 				}
 
 			} else {
 				fprintf(stderr, "Error receiving data via interrupt transfer %d\n", result);
+				clean_exit(devh);
 			}
 		
 			// Finished using the device.
@@ -317,8 +308,13 @@ int main(int argc, char *argv[])
 			libusb_release_interface(devh, 0);
 			
 			if (temp_value != 0 && hum_value != 0) {
-				printf("Temperature: %.1fC, ", temp_value);
-				printf("Humidity: %d%\n", hum_value);
+				if ( script == 1 ) {
+					printf("%.1f,", temp_value);
+					printf("%d%\n", hum_value);
+				} else {
+					printf("Temperature: %.1fC, ", temp_value);
+					printf("Humidity: %d%\n", hum_value);				
+				}
 				clean_exit(devh);
 			}
 			
@@ -326,18 +322,14 @@ int main(int argc, char *argv[])
 	
 		}
 		
+	} else {
+		fprintf(stderr, "Error: Can not init USB device\n");
 	}
 	
 	if (verbose == 1) {
 		printf("Close USB Device\n");
 	}
 
-	/*
-	libusb_close(devh);
-	libusb_exit(NULL);
-	return 0;
-	*/
-	
 	clean_exit(devh);
 	
 }
