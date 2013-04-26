@@ -132,7 +132,7 @@ void clean_exit( libusb_device_handle *devh ) {
 
 	libusb_close(devh);
 	libusb_exit(NULL);
-	return 0;
+	exit(0);
 
 }
 
@@ -314,7 +314,7 @@ int main(int argc, char *argv[])
 
 			libusb_release_interface(devh, 0);
 			
-			if (temp_value <> 0 && hum_value <> 0) {
+			if (temp_value != 0 && hum_value != 0) {
 				clean_exit(devh);
 			}
 			
