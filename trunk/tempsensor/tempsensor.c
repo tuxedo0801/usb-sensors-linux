@@ -264,6 +264,7 @@ int main(int argc, char *argv[])
 				if (data_in[0] == 2)
 				{
 					printout("Humidity", 0);
+					printout("Data1: ", data_in[1]);
 				}
 				if (data_in[0] == 3)
 				{
