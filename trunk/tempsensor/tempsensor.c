@@ -54,6 +54,15 @@ static const int MAX_CONTROL_OUT_TRANSFER_SIZE = 3;
 static const int INTERFACE_NUMBER = 0;
 static const int TIMEOUT_MS = 5000;
 
+// Assumes interrupt endpoint 2 IN and OUT:
+static const int INTERRUPT_IN_ENDPOINT = 0x81;
+static const int INTERRUPT_OUT_ENDPOINT = 0x01;
+	
+// With firmware support, transfers can be > the endpoint's max packet size.
+static const int MAX_INTERRUPT_IN_TRANSFER_SIZE = 5;
+static const int MAX_INTERRUPT_OUT_TRANSFER_SIZE = 5;
+
+/*
 int read_usb(libusb_device_handle *devh);
 
 // Use interrupt transfers to to write data to the device and receive data from the device.
@@ -105,15 +114,80 @@ int read_usb(libusb_device_handle *devh)
 	
 	return 0;
 }
+*/
+
+void help() {
+
+	printf("TempSensor 0.1 [options]\n");
+	printf("Options:\n");
+	printf("-v = Verbose printout\n");
+	printf("-t = Print temperature value and exit\n");
+	printf("-u = Print humidity value and exit\n"
+	printf("-h = Help, this printout\n");
+	exit(0);
+	
+}
+
+void printout(char *str, int value) {
+	
+	time_t t = time(NULL);
+	struct tm tm = *localtime(&t);
+	
+	printf("%04d-%02d-%02d %02d:%02d:%02d, ", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
+	if (value == 0) {
+		printf("%s\n", str); 
+	} else {
+		printf("%s %d\n", str, value); 
+	}
+}
 
 int main(void)
 {
+
+	// Command line arguments
+	verbose = 0;
+	temperature = 0;
+	humidity = 0;
+
+	while ((argc > 1) && (argv[1][0] == '-'))
+	{
+		switch (argv[1][1])
+		{
+			case 'v':
+				verbose = 1;
+				break;
+			
+			case 't':
+				temperature = 1;
+				break;
+			
+			case 'u':
+				humidity = 1;
+				break;
+			
+			case 'h':
+				help();
+				
+		}
+		
+		++argv;
+		--argc;
+	}
+
+	if (verbose == 1) {
+		printout("TempSensor 0.1", 0);
+	}
+
 	static const int VENDOR_ID = 0x1781;
 	static const int PRODUCT_ID = 0x0ec4;
 	
 	struct libusb_device_handle *devh = NULL;
 	int device_ready = 0;
 	int result;
+
+	if (verbose == 1) {
+		printout("Init sensor", 0);
+	}
 	
 	result = libusb_init(NULL);
 	if (result >= 0)
@@ -130,24 +204,63 @@ int main(void)
 				if (result >= 0)
 				{
 					device_ready = 1;
-					fprintf(stdout, "USB Device ready\n");
+					if (verbose == 1) {
+						printout("USB Device ready", 0);
+					}
 				} else {
-					fprintf(stderr, "libusb_claim_interface error %d\n", result);
+					fprintf(stderr, "Error: libusb_claim_interface error %d\n", result);
 				}
 			}
 			
 		} else {
-			fprintf(stderr, "Unable to find the device.\n");
+			fprintf(stderr, "Error: Unable to find the device.\n");
 		}
 		
 	} else {
-		fprintf(stderr, "Unable to initialize libusb.\n");
+		fprintf(stderr, "Error: Unable to initialize libusb.\n");
 	}
 	
 	if (device_ready)
 	{
+
+		if (verbose == 1) {
+			printout("Read device", 0);
+		}
+		
 		// Send and receive data.
-		read_usb(devh);
+		// read_usb(devh);
+		
+		int bytes_transferred;
+		int i = 0;
+		int result = 0;;
+	
+ 		char data_in[MAX_INTERRUPT_IN_TRANSFER_SIZE];
+		char data_out[MAX_INTERRUPT_OUT_TRANSFER_SIZE];
+	
+		// Read data from the device.
+		result = libusb_interrupt_transfer(
+			devh,
+			INTERRUPT_IN_ENDPOINT,
+			data_in,
+			MAX_INTERRUPT_OUT_TRANSFER_SIZE,
+			&bytes_transferred,
+			TIMEOUT_MS);
+	
+		if (result >= 0)
+		{
+			if (bytes_transferred > 0)
+			{
+				printf("Data received via interrupt transfer:\n");
+				for(i = 0; i < bytes_transferred; i++) {
+					printf("%02x ",data_in[i]);
+				}
+				printf("\n");
+			} else {
+				fprintf(stderr, "No data received in interrupt transfer (%d)\n", result);
+			}
+		} else {
+			fprintf(stderr, "Error receiving data via interrupt transfer %d\n", result);
+		}
 		
 		// Finished using the device.
 		fprintf(stdout, "Release interface\n");
