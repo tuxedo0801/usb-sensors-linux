@@ -256,13 +256,15 @@ int main(int argc, char *argv[])
 					printout("Data received:", 0);
 				}
 			
+				/*
 				for(i = 0; i < bytes_transferred; i++) {
 					printf("i=%d", i);
 					printf(",%02x ",data_in[i]);
 				}
 				printf("\n");
+				*/
 				
-				// Check if temp or hum
+				// Humidity data
 				if (data_in[0] == 2)
 				{
 					printout("Humidity", 0);
@@ -270,9 +272,13 @@ int main(int argc, char *argv[])
 					hum_value = (( data_in[1] / 2 ) - 2);
 					printout("Value: ", hum_value);
 				}
+				
+				// Temperature data
 				if (data_in[0] == 3)
 				{
 					printout("Temperature", 0);
+					printout("Data1: ", data_in[1]);
+					printout("Data2: ", data_in[2]);
 				}
 				
 			} else {
