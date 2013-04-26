@@ -175,7 +175,7 @@ int main(int argc, char *argv[])
 	}
 
 	if (verbose == 1) {
-		printout("TempSensor 0.1", 0);
+		printf("TempSensor 0.1");
 	}
 
 	static const int VENDOR_ID = 0x1781;
@@ -186,7 +186,7 @@ int main(int argc, char *argv[])
 	int result;
 
 	if (verbose == 1) {
-		printout("Init sensor", 0);
+		printf("Init sensor");
 	}
 	
 	result = libusb_init(NULL);
@@ -205,7 +205,7 @@ int main(int argc, char *argv[])
 				{
 					device_ready = 1;
 					if (verbose == 1) {
-						printout("USB Device ready", 0);
+						printf("USB Device ready");
 					}
 				} else {
 					fprintf(stderr, "Error: libusb_claim_interface error %d\n", result);
@@ -224,7 +224,7 @@ int main(int argc, char *argv[])
 	{
 
 		if (verbose == 1) {
-			printout("Read device", 0);
+			printf("Read device");
 		}
 		
 		// Send and receive data.
@@ -236,8 +236,9 @@ int main(int argc, char *argv[])
 		int i = 0;
 		int result = 0;;
 	
+		char *data_str;
+	
  		char data_in[MAX_INTERRUPT_IN_TRANSFER_SIZE];
-		char data_out[MAX_INTERRUPT_OUT_TRANSFER_SIZE];
 	
 		// Read data from the device.
 		result = libusb_interrupt_transfer(
@@ -253,7 +254,7 @@ int main(int argc, char *argv[])
 			if (bytes_transferred > 0)
 			{
 				if (verbose == 1) {
-					printout("Data received:", 0);
+					printf("Data received:");
 				}
 			
 				/*
@@ -264,21 +265,23 @@ int main(int argc, char *argv[])
 				printf("\n");
 				*/
 				
+				data_str = data_in;
+				
 				// Humidity data
 				if (data_in[0] == 2)
 				{
-					printout("Humidity", 0);
-					printout("Data1: ", data_in[1]);
+					printf("Humidity");
+					printf("Data1: %02x", data_in[1]);
 					hum_value = (( data_in[1] / 2 ) - 2);
-					printout("Value: ", hum_value);
+					printf("Value: %d", hum_value);
 				}
 				
 				// Temperature data
 				if (data_in[0] == 3)
 				{
-					printout("Temperature", 0);
-					printout("Data1: ", data_in[1]);
-					printout("Data2: ", data_in[2]);
+					printf("Temperature", 0);
+					printf("Data1: %02x", data_in[1]);
+					printf("Data2: %02x", data_in[2]);
 				}
 				
 			} else {
@@ -290,13 +293,13 @@ int main(int argc, char *argv[])
 		
 		// Finished using the device.
 		if (verbose == 1) {
-			printout("Release interface", 0);
+			printf("Release interface");
 		}
 		libusb_release_interface(devh, 0);
 	}
 	
 	if (verbose == 1) {
-		printout("Close USB Device", 0);
+		printf("Close USB Device");
 	}
 
 	libusb_close(devh);
