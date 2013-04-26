@@ -217,7 +217,7 @@ int main(int argc, char *argv[])
 			*/
 			
 			if (libusb_kernel_driver_active(devh, INTERFACE_NUMBER)) {
-				libusb_detach_kernel_driver(devh, INTERFACE_NUMBER)
+				libusb_detach_kernel_driver(devh, INTERFACE_NUMBER);
 			}
 
 			result = libusb_claim_interface(devh, INTERFACE_NUMBER);
