@@ -231,6 +231,7 @@ int main(int argc, char *argv[])
 		// read_usb(devh);
 		
 		int hum_value = 0;
+		float temp_value = 0.0;
 		
 		int bytes_transferred;
 		int i = 0;
@@ -288,7 +289,9 @@ int main(int argc, char *argv[])
 					int BIT_MASK = (int)0xff;   // low 8 bits
 					int byteValue = (int)(data_in[1] & BIT_MASK);
 					
-					printf("Data=%i", byteValue);
+					temp_value = ( byteValue * 0.1 ) + 3;
+					
+					printf("Temperature: %20s%20f C\n", temp_value);
 					
 				}
 				
