@@ -255,7 +255,8 @@ int main(int argc, char *argv[])
 				}
 			
 				for(i = 0; i < bytes_transferred; i++) {
-					printf("%02x ",data_in[i]);
+					printf("i=%d", i)
+					printf(",%02x ",data_in[i]);
 				}
 				printf("\n");
 				
