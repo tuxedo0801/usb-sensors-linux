@@ -250,11 +250,15 @@ int main(int argc, char *argv[])
 		{
 			if (bytes_transferred > 0)
 			{
-				printf("Data received via interrupt transfer:\n");
+				if (verbose == 1) {
+					printout("Data received via interrupt transfer:", 0);
+				}
+			
 				for(i = 0; i < bytes_transferred; i++) {
 					printf("%02x ",data_in[i]);
 				}
 				printf("\n");
+				
 			} else {
 				fprintf(stderr, "No data received in interrupt transfer (%d)\n", result);
 			}
@@ -263,11 +267,16 @@ int main(int argc, char *argv[])
 		}
 		
 		// Finished using the device.
-		fprintf(stdout, "Release interface\n");
+		if (verbose == 1) {
+			printout("Release interface", 0);
+		}
 		libusb_release_interface(devh, 0);
 	}
 	
-	fprintf(stdout, "Close USB Device\n");
+	if (verbose == 1) {
+		printout("Close USB Device", 0);
+	}
+
 	libusb_close(devh);
 	libusb_exit(NULL);
 	return 0;
