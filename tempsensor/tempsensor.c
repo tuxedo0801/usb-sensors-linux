@@ -251,7 +251,7 @@ int main(int argc, char *argv[])
 			if (bytes_transferred > 0)
 			{
 				if (verbose == 1) {
-					printout("Data received via interrupt transfer:", 0);
+					printout("Data received:", 0);
 				}
 			
 				for(i = 0; i < bytes_transferred; i++) {
@@ -259,8 +259,18 @@ int main(int argc, char *argv[])
 				}
 				printf("\n");
 				
+				# Check if temp or hum
+				if (data_in[0] == 2)
+				{
+					printout("Humidity", 0);
+				}
+				if (data_in[0] == 3)
+				{
+					printout("Temperature", 0);
+				}
+				
 			} else {
-				fprintf(stderr, "No data received in interrupt transfer (%d)\n", result);
+				fprintf(stderr, "Error: No data received (%d)\n", result);
 			}
 		} else {
 			fprintf(stderr, "Error receiving data via interrupt transfer %d\n", result);
