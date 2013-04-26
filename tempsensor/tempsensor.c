@@ -282,9 +282,11 @@ int main(int argc, char *argv[])
 				// Temperature data
 				if (data_in[0] == 3)
 				{
-					printf("Temperature\n", 0);
-					printf("Data1: %02x\n", data_in[1]);
-					printf("Data2: %02x\n", data_in[2]);
+					if (verbose == 1) {
+						printf("Temperature\n", 0);
+						printf("Data1: %02x\n", data_in[1]);
+						printf("Data2: %02x\n", data_in[2]);
+					}
 					
 					int BIT_MASK = (int)0xff;   // low 8 bits
 					int byteValue = (int)(data_in[1] & BIT_MASK);
