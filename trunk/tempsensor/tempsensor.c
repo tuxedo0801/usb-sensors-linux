@@ -312,7 +312,7 @@ int main(int argc, char *argv[])
 					printf("%d\n", hum_value);
 				} else {
 					printf("Temperature: %.1fC, ", temp_value);
-					printf("Humidity: %d%%", hum_value);				
+					printf("Humidity: %d%%\n", hum_value);				
 				}
 
 				libusb_release_interface(devh, 0);
