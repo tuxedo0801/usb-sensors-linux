@@ -104,11 +104,6 @@ test@lascar64bit:~/tempsensor$
 Please see [ReadMe_TempSensor readme] for more usage instructions
 
 ----
-= Download binary file =
-
-Software not released yet
-
-----
 = Troubleshooting =
 
 == Permission denied ==
