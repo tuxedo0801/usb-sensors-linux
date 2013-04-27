@@ -38,7 +38,7 @@ $ sudo apt-get install build-essential
 
 == Download the source code and compile ==
 
-This will download the latest version direct from trunk, this means that this is the version that is still under development and might not work as it should.
+Download the latest released version from GoogleCode.
 
 {{{
 $ mkdir tempsensor
