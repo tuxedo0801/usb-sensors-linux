@@ -40,7 +40,7 @@ $
 The verbose printout, can be useful in troubleshooting situations, as it will give lot of state printouts. It works in both "-s" mode as in the normal.
 
 Example;
-
+{{{
 $ ./tempsensor -v
 TempSensor 0.1
 Init sensor
