@@ -4,8 +4,6 @@
 
 Instructions how to install the 'tempsensor' utility on Linux.
 
-NOTE! This software is still under development, it does not yet work properly.
-
 = Tested on =
 
  * Debian 6 i386 (via VMWare)
