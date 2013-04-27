@@ -66,6 +66,10 @@ $
 
 To send the temp/hum data to Domoticz, then check the [Domoticz] page.
 
+== Graphite ==
+
+Soon...
+
 ----
 == Thanks ==
 
