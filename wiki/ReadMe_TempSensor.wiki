@@ -62,6 +62,10 @@ Temperature: 24.4C, Humidity: 22%
 $
 }}}
 
+== Domoticz ==
+
+To send the temp/hum data to Domoticz, then check the [Domoticz] page.
+
 ----
 == Thanks ==
 
