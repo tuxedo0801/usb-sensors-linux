@@ -29,11 +29,12 @@ $
 
 If used from script and only the values is wanted, then the -s switch should be used. It will print both temperature and humidity without any other details. These will be printed out on one line and comma separated.
 
-Exampled;
-
+Example;
+{{{
 $ ./tempsensor -s
 24.5,22
 $
+}}}
 
 === Verbose printout (-v) ===
 
