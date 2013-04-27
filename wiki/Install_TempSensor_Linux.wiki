@@ -53,6 +53,56 @@ Compile the source code
 $ gcc -o tempsensor tempsensor.c -lusb-1.0
 }}}
 
+== Test ==
+
+You can now execute the tempsensor and see if you get readings, as seen on most Linux installations it seems that you must be root user, or then add udev rule to make the device read/write.
+
+To run with root access
+
+{{{
+test@lascar64bit:~/tempsensor$ sudo ./tempsensor 
+Temperature: 16.2C, Humidity: 22%
+test@lascar64bit:~/tempsensor$
+}}}
+
+Without root access it will print following
+
+{{{
+test@lascar64bit:~/tempsensor$ ./tempsensor 
+Error: Unable to find the device.
+Error: Can not init USB device
+test@lascar64bit:~/tempsensor$
+}}}
+
+== Make Udev rule ==
+
+Insert a udev rule to get read/write access to the device from normal user.
+
+Create and edit following file:
+
+{{{
+$ sudo nano /etc/udev/rules.d/99-usb.rules
+}}}
+
+Add following lines;
+
+{{{
+# Lascar 
+SUBSYSTEM=="usb", ATTR{idVendor}=="1781", ATTR{idProduct}=="0ec4", MODE="0666"
+}}}
+
+Save and reboot, now the device should be writable and give you results.
+
+Example
+
+{{{
+test@lascar64bit:~/tempsensor$ ./tempsensor 
+Temperature: 24.5C, Humidity: 22%
+test@lascar64bit:~/tempsensor$
+}}}
+
+Please see [ReadMe_TempSensor readme] for more usage instructions
+
 ----
 = Download binary file =
 
@@ -74,19 +124,4 @@ It means that you have no access to the USB device, two solutions;
 
 a) use sudo, eg "sudo ./tempsensor"
 
-b) add line to udev to make the device writable
-
-Create and edit following file:
-
-{{{
-$ sudo nano /etc/udev/rules.d/99-usb.rules
-}}}
-
-Add following lines;
-
-{{{
-# Lascar 
-SUBSYSTEM=="usb", ATTR{idVendor}=="1781", ATTR{idProduct}=="0ec4", MODE="0666"
-}}}
-
-Save and reboot, now the device should be writable and give you results.
+b) create the udev rule as above
