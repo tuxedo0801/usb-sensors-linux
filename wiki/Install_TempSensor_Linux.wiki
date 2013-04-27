@@ -43,7 +43,8 @@ This will download the latest version direct from trunk, this means that this is
 {{{
 $ mkdir tempsensor
 $ cd tempsensor
-$ wget http://usb-sensors-linux.googlecode.com/svn/trunk/tempsensor/tempsensor.c
+$ wget http://usb-sensors-linux.googlecode.com/files/TempSensor-0.1.zip
+$ unzip TempSensor-0.1.zip
 }}}
 
 Compile the source code
