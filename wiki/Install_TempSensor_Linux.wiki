@@ -9,6 +9,7 @@ NOTE! This software is still under development, it does not yet work properly.
 = Tested on =
 
  * Debian 6 i386 (via VMWare)
+ * Ubuntu 13.04 64bit (via VMWare)
  * Raspbian (Raspberry Pi)
 
 = Details =
