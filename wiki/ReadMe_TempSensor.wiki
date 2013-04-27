@@ -75,7 +75,7 @@ Lascar EL-USB-RT is a product of Lascar Electronics Ltd.
 ----
 == Copyright ==
 
-Copyright (C) 2012 Sebastian Sjoholm
+Copyright (C) 2013 Sebastian Sjoholm
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
