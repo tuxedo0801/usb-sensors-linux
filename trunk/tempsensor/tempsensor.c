@@ -1,6 +1,27 @@
 /*
  * tempsensor.c
  *
+ * Copyright (C) 2013 Sebastian Sjoholm, sebastian.sjoholm@gmail.com
+ *	
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *	
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Version history can be found at 
+ * http://code.google.com/p/usb-sensors-linux/wiki/VersionHistory_TempSensor
+ *
+ * $Rev: 417 $
+ * $Date: 2013-04-18 21:04:29 +0200 (Thu, 18 Apr 2013) $
+ *
  * Based on generic_hid.c by Jan Axelson (Apr 22, 2011)
  *
  * License of generic_hid.c:
@@ -19,15 +40,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * 
+ * Requirements: 
+ *
+ * libusb-1.0
+ *
+ * Compile:
  * 
- * 
- * 
- * 
-The application uses the libusb 1.0 API from libusb.org.
-Compile the application with the -lusb-1.0 option. 
-Use the -I option if needed to specify the path to the libusb.h header file. For example:
--I/usr/local/angstrom/arm/arm-angstrom-linux-gnueabi/usr/include/libusb-1.0 
-
+ * gcc -o tempsensor tempsensor.c -lusb-1.0
+ *
  */
 
 #include <errno.h>
@@ -61,60 +81,6 @@ static const int INTERRUPT_OUT_ENDPOINT = 0x01;
 // With firmware support, transfers can be > the endpoint's max packet size.
 static const int MAX_INTERRUPT_IN_TRANSFER_SIZE = 5;
 static const int MAX_INTERRUPT_OUT_TRANSFER_SIZE = 5;
-
-/*
-int read_usb(libusb_device_handle *devh);
-
-// Use interrupt transfers to to write data to the device and receive data from the device.
-// Returns - zero on success, libusb error code on failure.
-int read_usb(libusb_device_handle *devh)
-{
-	
-	// Assumes interrupt endpoint 2 IN and OUT:
-	static const int INTERRUPT_IN_ENDPOINT = 0x81;
-	static const int INTERRUPT_OUT_ENDPOINT = 0x01;
-	
-	// With firmware support, transfers can be > the endpoint's max packet size.
-	static const int MAX_INTERRUPT_IN_TRANSFER_SIZE = 5;
-	static const int MAX_INTERRUPT_OUT_TRANSFER_SIZE = 5;
-	
-	int bytes_transferred;
-	int i = 0;
-	int result = 0;;
-	
- 	char data_in[MAX_INTERRUPT_IN_TRANSFER_SIZE];
-	char data_out[MAX_INTERRUPT_OUT_TRANSFER_SIZE];
-	
-	// Read data from the device.
-	result = libusb_interrupt_transfer(
-			devh,
-			INTERRUPT_IN_ENDPOINT,
-			data_in,
-			MAX_INTERRUPT_OUT_TRANSFER_SIZE,
-			&bytes_transferred,
-			TIMEOUT_MS);
-	
-	if (result >= 0)
-	{
-		if (bytes_transferred > 0)
-		{
-			printf("Data received via interrupt transfer:\n");
-			for(i = 0; i < bytes_transferred; i++) {
-				printf("%02x ",data_in[i]);
-			}
-			printf("\n");
-		} else {
-			fprintf(stderr, "No data received in interrupt transfer (%d)\n", result);
-			return -1;
-		}
-	} else {
-		fprintf(stderr, "Error receiving data via interrupt transfer %d\n", result);
-		return result;
-	}
-	
-	return 0;
-}
-*/
 
 void help() {
 
@@ -188,7 +154,7 @@ int main(int argc, char *argv[])
 	int result;
 
 	if (verbose == 1) {
-		printf("Init sensor\n");
+		printf("Open USB device\n");
 	}
 	
 	result = libusb_init(NULL);
@@ -211,11 +177,13 @@ int main(int argc, char *argv[])
 					}
 				} else {
 					fprintf(stderr, "Error: libusb_claim_interface error %d\n", result);
+					exit(1);
 				}
 			}
 			
 		} else {
 			fprintf(stderr, "Error: Unable to find the device.\n");
+			exit(1);
 		}
 		
 	} else {
