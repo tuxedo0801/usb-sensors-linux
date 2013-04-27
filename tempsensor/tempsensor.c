@@ -267,7 +267,7 @@ int main(int argc, char *argv[])
 						if (verbose == 1) {
 							printf("Humidity\n");
 							printf("Data1: %02x\n", data_in[1]);
-							printf("Value: %d %\n", hum_value);
+							printf("Value: %d%%\n", hum_value);
 						}
 						
 					}
@@ -285,7 +285,7 @@ int main(int argc, char *argv[])
 							printf("Temperature\n", 0);
 							printf("Data1: %02x\n", data_in[1]);
 							printf("Data2: %02x\n", data_in[2]);
-							printf("Value: %.1f C\n", temp_value);
+							printf("Value: %.1fC\n", temp_value);
 						}
 					
 					}
@@ -311,8 +311,8 @@ int main(int argc, char *argv[])
 					printf("%.1f,", temp_value);
 					printf("%d\n", hum_value);
 				} else {
-					printf("Temperature: %.1f C, ", temp_value);
-					printf("Humidity: %d ", hum_value);				
+					printf("Temperature: %.1fC, ", temp_value);
+					printf("Humidity: %d%%", hum_value);				
 				}
 
 				libusb_release_interface(devh, 0);
