@@ -1,0 +1,48 @@
+#summary How to send data from sensor to Domoticz
+
+= Introduction =
+
+Instructions how to send sensor data to the Domoticz application. Domoticz is a home automation system that can monitor different sensors via RFXtrx433 device, but it is also possible to send data via the web interface.
+
+The only thing that is needed is a small bash script that collect the data, and send it to Domoticz with the curl utility.
+
+= Send data from Tempsensor =
+
+It is assumed that the tempsensor utility is installed and is working properly.
+
+The bash script file:
+
+{{{
+#!/bin/sh
+
+# Domoticz server
+SERVER="a.b.c.d:8080"
+
+# Get data
+INDATA=`/home/user/tempsensor/tempsensor -s`
+TEMP=`echo $INDATA | cut -d \, -f 1`
+HUM=`echo $INDATA | cut -d \, -f 2`
+
+# If TEMP/HUM contains value then send it to Domoticz
+if [ -z "$TEMP" -a -z "$HUM" ];
+then
+	echo "$NOW - Error: Value variable empty"
+else
+        # Sensor parameters
+        HID="1"
+        DID="4000"
+        DUNIT="4"
+        DTYPE="82"
+        DSUBTYPE="1"
+        NVALUE="0"
+        SVALUE="$TEMP;$HUM;9"
+
+        # Send data
+        curl -s -i -H "Accept: application/json" "http://$SERVER/json.htm?type=command&param=udevice&hid=$HID&did=$DID&dunit=$DUNIT&dtype=$DTYPE&dsubtype=$DSUBTYPE&nvalue=$NVALUE&svalue=$SVALUE"
+fi
+}}}
+
+Following lines needs to be edited to suit your system
+
+ * SERVER = this should be the address for your Domoticz server
+ * The variable INDATA should contain the path where the Tempsensor utility is located
