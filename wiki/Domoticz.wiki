@@ -51,4 +51,4 @@ With these sensor type the data will be reported as type "Temp + Humidity" and s
 
 Example of a 24 hour sensor data in Domoticz from Lascar EL-USB-RT:
 
-http://code.google.com/p/usb-sensors-linux/images/tempsensor_domoticz.png
+http://usb-sensors-linux.googlecode.com/svn/images/tempsensor_domoticz.png
