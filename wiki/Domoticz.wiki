@@ -46,3 +46,9 @@ Following lines needs to be edited to suit your system
 
  * Variable _*SERVER*_ this should be the address for your Domoticz server
  * Variable _*INDATA*_ should contain the path where the Tempsensor utility is located
+
+With these sensor type the data will be reported as type "Temp + Humidity" and subtype "Oregon THGN122/123, THGN132, THGR122/228/238/268".
+
+Example of a 24 hour sensor data in Domoticz from Lascar EL-USB-RT:
+
+http://code.google.com/p/usb-sensors-linux/images/tempsensor_domoticz.png
