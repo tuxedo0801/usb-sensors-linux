@@ -44,5 +44,5 @@ fi
 
 Following lines needs to be edited to suit your system
 
- * _*SERVER*_ this should be the address for your Domoticz server
- * The variable _*INDATA*_ should contain the path where the Tempsensor utility is located
+ * Variable _*SERVER*_ this should be the address for your Domoticz server
+ * Variable _*INDATA*_ should contain the path where the Tempsensor utility is located
