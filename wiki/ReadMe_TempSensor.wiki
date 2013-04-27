@@ -81,6 +81,14 @@ Jan Axelson (for the excellent libusb example)
 Lascar EL-USB-RT is a product of Lascar Electronics Ltd.
 
 ----
+== Other ==
+
+Other open source projects that supports Lascar EL-USB-RT device;
+
+ * http://code.google.com/p/lascar-usb-termometer/
+ * https://github.com/rca/lascar-usb-thermometer
+
+----
 == Copyright ==
 
 Copyright (C) 2013 Sebastian Sjoholm
