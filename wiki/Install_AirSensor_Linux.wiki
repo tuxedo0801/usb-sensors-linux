@@ -35,7 +35,7 @@ $ sudo apt-get install build-essential
 
 == Download the source code and compile ==
 
-Download the latest released version from GoogleCode.
+Download the latest version from SVN trunk, no released version is packaged yet.
 
 {{{
 $ mkdir airsensor
