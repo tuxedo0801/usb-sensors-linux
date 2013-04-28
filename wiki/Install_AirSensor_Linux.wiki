@@ -88,10 +88,10 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="03eb", ATTR{idProduct}=="2013", MODE="0666"
 
 Save and reboot, now the device should be writable and give you results.
 
-Example:
+Example, without sudo
 
 {{{
-$ sudo ./airsensor -o
+$ ./airsensor -o
 2013-04-28 15:08:55, VOC: 450, RESULT: OK
 $
 }}}
