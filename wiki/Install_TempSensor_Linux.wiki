@@ -43,7 +43,7 @@ Download the latest released version from GoogleCode.
 {{{
 $ mkdir tempsensor
 $ cd tempsensor
-$ wget http://usb-sensors-linux.googlecode.com/files/TempSensor-0.1.zip
+$ wget http://usb-sensors-linux.googlecode.com/files/TempSensor-0.11.zip
 $ unzip TempSensor-0.1.zip
 }}}
 
@@ -60,18 +60,18 @@ You can now execute the tempsensor and see if you get readings, as seen on most 
 To run with root access
 
 {{{
-test@lascar64bit:~/tempsensor$ sudo ./tempsensor 
+$ sudo ./tempsensor 
 Temperature: 16.2C, Humidity: 22%
-test@lascar64bit:~/tempsensor$
+$
 }}}
 
 Without root access it will print following
 
 {{{
-test@lascar64bit:~/tempsensor$ ./tempsensor 
+$ ./tempsensor 
 Error: Unable to find the device.
 Error: Can not init USB device
-test@lascar64bit:~/tempsensor$
+$
 }}}
 
 == Make Udev rule ==
@@ -96,9 +96,9 @@ Save and reboot, now the device should be writable and give you results.
 Example
 
 {{{
-test@lascar64bit:~/tempsensor$ ./tempsensor 
+$ ./tempsensor 
 Temperature: 24.5C, Humidity: 22%
-test@lascar64bit:~/tempsensor$
+$
 }}}
 
 Please see [ReadMe_TempSensor readme] for more usage instructions
