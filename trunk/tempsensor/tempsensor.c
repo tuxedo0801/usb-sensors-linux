@@ -234,6 +234,7 @@ int main(int argc, char *argv[])
 
 						if (verbose == 1) {
 							printf("Humidity\n");
+							printf("Data0: %02x\n", data_in[0]);
 							printf("Data1: %02x\n", data_in[1]);
 							printf("Value: %d%%\n", hum_value);
 						}
@@ -247,10 +248,16 @@ int main(int argc, char *argv[])
 						int BIT_MASK = (int)0xff;   // low 8 bits
 						int byteValue = (int)(data_in[1] & BIT_MASK);
 					
-						temp_value = ( ( byteValue + data_in[2] ) * 0.1 ) + 3;
+						// temp_value = ( ( byteValue + data_in[2] ) * 0.1 ) + 3;
 					
+						int low_val = data_in[1];
+						int hi_val = data_in[2] * 256;
+						int value = hi_val + low_val;
+						temp_value = ((value * 0.1) - 200);
+
 						if (verbose == 1) {
 							printf("Temperature\n", 0);
+							printf("Data0: %02x\n", data_in[0]);
 							printf("Data1: %02x\n", data_in[1]);
 							printf("Data2: %02x\n", data_in[2]);
 							printf("Value: %.1fC\n", temp_value);
