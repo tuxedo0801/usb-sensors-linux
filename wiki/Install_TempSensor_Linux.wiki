@@ -44,7 +44,7 @@ Download the latest released version from GoogleCode.
 $ mkdir tempsensor
 $ cd tempsensor
 $ wget http://usb-sensors-linux.googlecode.com/files/TempSensor-0.11.zip
-$ unzip TempSensor-0.1.zip
+$ unzip TempSensor-0.11.zip
 }}}
 
 Compile the source code
