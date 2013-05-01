@@ -8,7 +8,7 @@ The only thing that is needed is a small bash script that collect the data, and 
 
 <wiki:toc max_depth="2" />
 
-=Send data from Tempsensor=
+=Send data from Tempsensor (Lascar EL-USB-RT)=
 
 It is assumed that the tempsensor utility is installed and is working properly.
 
@@ -51,7 +51,7 @@ Following lines needs to be edited to suit your system
 
 With these sensor type the data will be reported as type "Temp + Humidity" and subtype "Oregon THGN122/123, THGN132, THGR122/228/238/268".
 
-===Schedule===
+==Schedule==
 
 To make it automatic, you need to add the script to the crontab.
 
@@ -69,7 +69,7 @@ And add following line (note, to change the path to your correct path)
 
 Now the data should go to Domoticz every minute.
 
-===Example===
+==Example==
 Example of a 24 hour sensor data in Domoticz from Lascar EL-USB-RT:
 
 http://usb-sensors-linux.googlecode.com/svn/images/tempsensor_domoticz.png
