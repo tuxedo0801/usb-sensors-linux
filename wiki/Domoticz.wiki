@@ -73,3 +73,8 @@ Now the data should go to Domoticz every minute.
 Example of a 24 hour sensor data in Domoticz from Lascar EL-USB-RT:
 
 http://usb-sensors-linux.googlecode.com/svn/images/tempsensor_domoticz.png
+
+
+=Send data from Airsensor (Indoor Air Quality USB Sensor / CO-20)=
+
+It is assumed that the tempsensor utility is installed and is working properly.
