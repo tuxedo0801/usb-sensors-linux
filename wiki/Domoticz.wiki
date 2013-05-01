@@ -13,6 +13,8 @@ The only thing that is needed is a small bash script that collect the data, and 
 
 It is assumed that the tempsensor utility is installed and is working properly.
 
+==Script==
+
 The bash script file:
 
 {{{
