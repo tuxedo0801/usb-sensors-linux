@@ -8,6 +8,7 @@ The only thing that is needed is a small bash script that collect the data, and 
 
 <wiki:toc max_depth="2" />
 
+----
 =Send data from Tempsensor (Lascar EL-USB-RT)=
 
 It is assumed that the tempsensor utility is installed and is working properly.
@@ -74,7 +75,7 @@ Example of a 24 hour sensor data in Domoticz from Lascar EL-USB-RT:
 
 http://usb-sensors-linux.googlecode.com/svn/images/tempsensor_domoticz.png
 
-
-=Send data from Airsensor (Indoor Air Quality USB Sensor / CO-20)=
+----
+=Send data from Airsensor (Indoor Air Quality USB Sensor)=
 
 It is assumed that the tempsensor utility is installed and is working properly.
