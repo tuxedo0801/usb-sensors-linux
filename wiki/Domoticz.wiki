@@ -6,6 +6,8 @@ Instructions how to send sensor data to the Domoticz application. Domoticz is a 
 
 The only thing that is needed is a small bash script that collect the data, and send it to Domoticz with the curl utility.
 
+<wiki:toc max_depth="1" />
+
 ==Send data from Tempsensor==
 
 It is assumed that the tempsensor utility is installed and is working properly.
