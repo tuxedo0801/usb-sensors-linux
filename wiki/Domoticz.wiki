@@ -31,7 +31,7 @@ HUM=`echo $INDATA | cut -d \, -f 2`
 # If TEMP/HUM contains value then send it to Domoticz
 if [ -z "$TEMP" -a -z "$HUM" ];
 then
-	echo "$NOW - Error: Value variable empty"
+	echo "Error: Value variable empty"
 else
         # Sensor parameters
         HID="1"
