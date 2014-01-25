@@ -2,6 +2,8 @@
 
 = Introduction =
 
+The Voltcraft CO-20 Air Quality USB sensor, is a rebranded Applied Sensors product, that exists in many different brands. It will measure the Indoor Air Quality (IAQ) in VOC units. 
+
 [http://www.voltcraft.co.uk Voltcraft] does not have this product on their own homepage, but it can be found on [http://www.conrad.com/ce/en/product/101316/Voltcraft-CO-20-USB-Air-Quality-Sensor Conrad homepage] (which owns Voltcraft).
 
 Alternative projects that support Voltcraft CO-20 device, my version is based from these two projects;
